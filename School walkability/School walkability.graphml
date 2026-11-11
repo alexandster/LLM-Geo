@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d2" for="node" attr.name="description" attr.type="string" />
+  <key id="d1" for="node" attr.name="data_path" attr.type="string" />
+  <key id="d0" for="node" attr.name="node_type" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="Columbia_schools">
+      <data key="d0">data</data>
+      <data key="d1">https://github.com/gladcolor/spatial_data/raw/refs/heads/master/South_Carolina/Columbia_schools.gpkg</data>
+      <data key="d2">Columbia school points dataset (EPSG:4326)</data>
+    </node>
+    <node id="load_school_points">
+      <data key="d0">operation</data>
+      <data key="d1" />
+      <data key="d2">Load Columbia school points from URL</data>
+    </node>
+    <node id="school_points_gdf">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">School points GeoDataFrame</data>
+    </node>
+    <node id="Columbia_roads">
+      <data key="d0">data</data>
+      <data key="d1">https://github.com/gladcolor/spatial_data/raw/refs/heads/master/South_Carolina/Columbia_road.gpkg</data>
+      <data key="d2">Columbia road network dataset (EPSG:4326)</data>
+    </node>
+    <node id="load_roads">
+      <data key="d0">operation</data>
+      <data key="d1" />
+      <data key="d2">Load Columbia road network from URL</data>
+    </node>
+    <node id="roads_gdf">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">Road network GeoDataFrame</data>
+    </node>
+    <node id="Columbia_sidewalks">
+      <data key="d0">data</data>
+      <data key="d1">https://github.com/gladcolor/spatial_data/raw/refs/heads/master/South_Carolina/Columbia_sidewalks.gpkg</data>
+      <data key="d2">Columbia sidewalk network dataset (EPSG:4326)</data>
+    </node>
+    <node id="load_sidewalks">
+      <data key="d0">operation</data>
+      <data key="d1" />
+      <data key="d2">Load Columbia sidewalk network from URL</data>
+    </node>
+    <node id="sidewalks_gdf">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">Sidewalk network GeoDataFrame</data>
+    </node>
+    <node id="generate_school_buffers">
+      <data key="d0">operation</data>
+      <data key="d1" />
+      <data key="d2">Buffer each school point by 1 km to create study areas</data>
+    </node>
+    <node id="school_buffers_gdf">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">GeoDataFrame of school buffers (1 km)</data>
+    </node>
+    <node id="extract_roads_in_buffer">
+      <data key="d0">operation</data>
+      <data key="d1" />
+      <data key="d2">Spatially extract road segments intersecting each school buffer</data>
+    </node>
+    <node id="roads_within_buffers">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">Road segments within each school buffer</data>
+    </node>
+    <node id="extract_sidewalks_in_buffer">
+      <data key="d0">operation</data>
+      <data key="d1" />
+      <data key="d2">Spatially extract sidewalk segments intersecting each school buffer</data>
+    </node>
+    <node id="sidewalks_within_buffers">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">Sidewalk segments within each school buffer</data>
+    </node>
+    <node id="compute_roads_length">
+      <data key="d0">operation</data>
+      <data key="d1" />
+      <data key="d2">Compute total road length within each school buffer</data>
+    </node>
+    <node id="roads_length_by_school">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">Total road length per school buffer</data>
+    </node>
+    <node id="compute_sidewalks_length">
+      <data key="d0">operation</data>
+      <data key="d1" />
+      <data key="d2">Compute total sidewalk length within each school buffer</data>
+    </node>
+    <node id="sidewalks_length_by_school">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">Total sidewalk length per school buffer</data>
+    </node>
+    <node id="calculate_walkability">
+      <data key="d0">operation</data>
+      <data key="d1" />
+      <data key="d2">Calculate walkability score for each school as sidewalk/road length ratio</data>
+    </node>
+    <node id="school_walkability_scores">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">Walkability scores for schools with school identifiers</data>
+    </node>
+    <node id="draw_school_maps">
+      <data key="d0">operation</data>
+      <data key="d1" />
+      <data key="d2">Generate maps for each school with sidewalk and buffer overlay on OpenStreetMap basemap; title includes school name and walkability score</data>
+    </node>
+    <node id="final_walkability_maps">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">Final maps for schools showing walkability assessment</data>
+    </node>
+    <edge source="Columbia_schools" target="load_school_points" />
+    <edge source="load_school_points" target="school_points_gdf" />
+    <edge source="school_points_gdf" target="generate_school_buffers" />
+    <edge source="school_points_gdf" target="draw_school_maps" />
+    <edge source="Columbia_roads" target="load_roads" />
+    <edge source="load_roads" target="roads_gdf" />
+    <edge source="roads_gdf" target="extract_roads_in_buffer" />
+    <edge source="Columbia_sidewalks" target="load_sidewalks" />
+    <edge source="load_sidewalks" target="sidewalks_gdf" />
+    <edge source="sidewalks_gdf" target="extract_sidewalks_in_buffer" />
+    <edge source="generate_school_buffers" target="school_buffers_gdf" />
+    <edge source="school_buffers_gdf" target="extract_roads_in_buffer" />
+    <edge source="school_buffers_gdf" target="extract_sidewalks_in_buffer" />
+    <edge source="school_buffers_gdf" target="draw_school_maps" />
+    <edge source="extract_roads_in_buffer" target="roads_within_buffers" />
+    <edge source="roads_within_buffers" target="compute_roads_length" />
+    <edge source="extract_sidewalks_in_buffer" target="sidewalks_within_buffers" />
+    <edge source="sidewalks_within_buffers" target="compute_sidewalks_length" />
+    <edge source="sidewalks_within_buffers" target="draw_school_maps" />
+    <edge source="compute_roads_length" target="roads_length_by_school" />
+    <edge source="roads_length_by_school" target="calculate_walkability" />
+    <edge source="compute_sidewalks_length" target="sidewalks_length_by_school" />
+    <edge source="sidewalks_length_by_school" target="calculate_walkability" />
+    <edge source="calculate_walkability" target="school_walkability_scores" />
+    <edge source="school_walkability_scores" target="draw_school_maps" />
+    <edge source="draw_school_maps" target="final_walkability_maps" />
+  </graph>
+</graphml>
