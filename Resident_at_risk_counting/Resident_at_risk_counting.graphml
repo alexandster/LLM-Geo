@@ -21,7 +21,7 @@
     <node id="tract_shp_url">
       <data key="d0">data</data>
       <data key="d1">https://github.com/gladcolor/LLM-Geo/raw/master/overlay_analysis/tract_37_EPSG4326.zip</data>
-      <data key="d2">North Carolina tract shapefile URL</data>
+      <data key="d2">North Carolina tract boundary shapefile URL</data>
     </node>
     <node id="load_tract_shp">
       <data key="d0">operation</data>
@@ -32,84 +32,72 @@
       <data key="d1" />
       <data key="d2">NC tract boundary GeoDataFrame</data>
     </node>
-    <node id="tract_population_csv_url">
+    <node id="population_csv_url">
       <data key="d0">data</data>
       <data key="d1">https://github.com/gladcolor/LLM-Geo/raw/master/overlay_analysis/NC_tract_population.csv</data>
-      <data key="d2">NC tract population CSV URL</data>
+      <data key="d2">North Carolina tract population CSV URL</data>
     </node>
-    <node id="load_tract_population_csv">
+    <node id="load_population_csv">
       <data key="d0">operation</data>
-      <data key="d2">Load tract population CSV</data>
+      <data key="d2">Load NC tract population CSV</data>
     </node>
-    <node id="tract_population_df">
+    <node id="population_df">
       <data key="d0">data</data>
       <data key="d1" />
       <data key="d2">NC tract population DataFrame</data>
     </node>
-    <node id="spatial_join_haz_waste_tracts">
+    <node id="join_population_tracts">
       <data key="d0">operation</data>
-      <data key="d2">Spatial join hazardous waste sites with tracts</data>
+      <data key="d2">Join population data to tract boundaries via GEOID</data>
     </node>
-    <node id="haz_waste_in_tracts_gdf">
+    <node id="tracts_with_population_gdf">
       <data key="d0">data</data>
       <data key="d1" />
-      <data key="d2">GeoDataFrame with tracts containing hazardous waste sites</data>
+      <data key="d2">Tracts with joined population data</data>
     </node>
-    <node id="merge_population_haz_waste_tracts">
+    <node id="spatial_join_haz_waste">
       <data key="d0">operation</data>
-      <data key="d2">Merge tract population with hazardous waste sites tracts</data>
+      <data key="d2">Spatial join to find tracts containing hazardous waste facilities</data>
     </node>
-    <node id="merged_population_haz_waste_df">
+    <node id="hazardous_tracts_gdf">
       <data key="d0">data</data>
       <data key="d1" />
-      <data key="d2">DataFrame with populations in tracts with hazardous waste facilities</data>
+      <data key="d2">Tracts containing hazardous waste facilities</data>
     </node>
-    <node id="compute_population_haz_waste_tracts">
+    <node id="calculate_population">
       <data key="d0">operation</data>
-      <data key="d2">Compute total population living in tracts with hazardous waste facilities</data>
+      <data key="d2">Calculate population in hazardous waste tracts</data>
     </node>
-    <node id="total_population_haz_waste">
+    <node id="hazardous_population">
       <data key="d0">data</data>
       <data key="d1" />
-      <data key="d2">Total population in tracts with hazardous waste facilities</data>
+      <data key="d2">Total population in hazardous waste tracts</data>
     </node>
-    <node id="merge_population_tracts">
+    <node id="generate_choropleth_map">
       <data key="d0">operation</data>
-      <data key="d2">Merge tract population with NC tract boundary</data>
+      <data key="d2">Generate choropleth map with highlighted hazardous waste tracts</data>
     </node>
-    <node id="tracts_population_gdf">
+    <node id="population_choropleth_map">
       <data key="d0">data</data>
       <data key="d1" />
-      <data key="d2">GeoDataFrame with NC tract boundary and population</data>
-    </node>
-    <node id="generate_map">
-      <data key="d0">operation</data>
-      <data key="d2">Generate population choropleth map with highlighted hazardous waste tracts</data>
-    </node>
-    <node id="nc_population_map">
-      <data key="d0">data</data>
-      <data key="d1" />
-      <data key="d2">Population choropleth map with highlighted hazardous waste tracts</data>
+      <data key="d2">Choropleth map with hazardous waste tracts highlighted</data>
     </node>
     <edge source="haz_waste_shp_url" target="load_haz_waste_shp" />
     <edge source="load_haz_waste_shp" target="haz_waste_gdf" />
-    <edge source="haz_waste_gdf" target="spatial_join_haz_waste_tracts" />
+    <edge source="haz_waste_gdf" target="spatial_join_haz_waste" />
     <edge source="tract_shp_url" target="load_tract_shp" />
     <edge source="load_tract_shp" target="tract_gdf" />
-    <edge source="tract_gdf" target="spatial_join_haz_waste_tracts" />
-    <edge source="tract_gdf" target="merge_population_tracts" />
-    <edge source="tract_population_csv_url" target="load_tract_population_csv" />
-    <edge source="load_tract_population_csv" target="tract_population_df" />
-    <edge source="tract_population_df" target="merge_population_haz_waste_tracts" />
-    <edge source="tract_population_df" target="merge_population_tracts" />
-    <edge source="spatial_join_haz_waste_tracts" target="haz_waste_in_tracts_gdf" />
-    <edge source="haz_waste_in_tracts_gdf" target="merge_population_haz_waste_tracts" />
-    <edge source="haz_waste_in_tracts_gdf" target="generate_map" />
-    <edge source="merge_population_haz_waste_tracts" target="merged_population_haz_waste_df" />
-    <edge source="merged_population_haz_waste_df" target="compute_population_haz_waste_tracts" />
-    <edge source="compute_population_haz_waste_tracts" target="total_population_haz_waste" />
-    <edge source="merge_population_tracts" target="tracts_population_gdf" />
-    <edge source="tracts_population_gdf" target="generate_map" />
-    <edge source="generate_map" target="nc_population_map" />
+    <edge source="tract_gdf" target="join_population_tracts" />
+    <edge source="population_csv_url" target="load_population_csv" />
+    <edge source="load_population_csv" target="population_df" />
+    <edge source="population_df" target="join_population_tracts" />
+    <edge source="join_population_tracts" target="tracts_with_population_gdf" />
+    <edge source="tracts_with_population_gdf" target="spatial_join_haz_waste" />
+    <edge source="tracts_with_population_gdf" target="generate_choropleth_map" />
+    <edge source="spatial_join_haz_waste" target="hazardous_tracts_gdf" />
+    <edge source="hazardous_tracts_gdf" target="calculate_population" />
+    <edge source="hazardous_tracts_gdf" target="generate_choropleth_map" />
+    <edge source="calculate_population" target="hazardous_population" />
+    <edge source="generate_choropleth_map" target="population_choropleth_map" />
   </graph>
 </graphml>
