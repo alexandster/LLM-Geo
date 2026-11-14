@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d2" for="node" attr.name="description" attr.type="string" />
+  <key id="d1" for="node" attr.name="data_path" attr.type="string" />
+  <key id="d0" for="node" attr.name="node_type" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="haz_waste_shp_url">
+      <data key="d0">data</data>
+      <data key="d1">https://github.com/gladcolor/LLM-Geo/raw/master/overlay_analysis/HW_Sites_EPSG4326.zip</data>
+      <data key="d2">NC hazardous waste facility shapefile URL</data>
+    </node>
+    <node id="load_haz_waste_shp">
+      <data key="d0">operation</data>
+      <data key="d2">Load NC hazardous waste facility shapefile</data>
+    </node>
+    <node id="haz_waste_gdf">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">NC hazardous waste facility GeoDataFrame</data>
+    </node>
+    <node id="tract_boundary_shp_url">
+      <data key="d0">data</data>
+      <data key="d1">https://github.com/gladcolor/LLM-Geo/raw/master/overlay_analysis/tract_37_EPSG4326.zip</data>
+      <data key="d2">NC tract boundary shapefile URL</data>
+    </node>
+    <node id="load_tract_boundary_shp">
+      <data key="d0">operation</data>
+      <data key="d2">Load NC tract boundary shapefile</data>
+    </node>
+    <node id="tract_boundary_gdf">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">NC tract boundary GeoDataFrame</data>
+    </node>
+    <node id="tract_population_csv_url">
+      <data key="d0">data</data>
+      <data key="d1">https://github.com/gladcolor/LLM-Geo/raw/master/overlay_analysis/NC_tract_population.csv</data>
+      <data key="d2">NC tract population CSV URL</data>
+    </node>
+    <node id="load_tract_population_csv">
+      <data key="d0">operation</data>
+      <data key="d2">Load NC tract population CSV</data>
+    </node>
+    <node id="tract_population_df">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">NC tract population DataFrame</data>
+    </node>
+    <node id="spatial_join_haz_tracts">
+      <data key="d0">operation</data>
+      <data key="d2">Spatial join to find tracts with hazardous waste facilities</data>
+    </node>
+    <node id="haz_tracts_gdf">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">Tracts containing hazardous waste facilities</data>
+    </node>
+    <node id="join_population_tracts">
+      <data key="d0">operation</data>
+      <data key="d2">Join population data with tract boundaries on GEOID</data>
+    </node>
+    <node id="tracts_with_population_gdf">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">Tract boundaries with population data</data>
+    </node>
+    <node id="compute_white_population_haz_tracts">
+      <data key="d0">operation</data>
+      <data key="d2">Compute White population in tracts with hazardous waste facilities</data>
+    </node>
+    <node id="white_population_at_risk">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">White population living in tracts with hazardous waste facilities</data>
+    </node>
+    <node id="generate_choropleth_map">
+      <data key="d0">operation</data>
+      <data key="d2">Generate choropleth map of White population with highlighted tracts with hazardous waste facilities</data>
+    </node>
+    <node id="choropleth_map">
+      <data key="d0">data</data>
+      <data key="d1" />
+      <data key="d2">Choropleth map of White population with highlighted hazardous waste tracts</data>
+    </node>
+    <edge source="haz_waste_shp_url" target="load_haz_waste_shp" />
+    <edge source="load_haz_waste_shp" target="haz_waste_gdf" />
+    <edge source="haz_waste_gdf" target="spatial_join_haz_tracts" />
+    <edge source="tract_boundary_shp_url" target="load_tract_boundary_shp" />
+    <edge source="load_tract_boundary_shp" target="tract_boundary_gdf" />
+    <edge source="tract_boundary_gdf" target="spatial_join_haz_tracts" />
+    <edge source="tract_boundary_gdf" target="join_population_tracts" />
+    <edge source="tract_population_csv_url" target="load_tract_population_csv" />
+    <edge source="load_tract_population_csv" target="tract_population_df" />
+    <edge source="tract_population_df" target="join_population_tracts" />
+    <edge source="spatial_join_haz_tracts" target="haz_tracts_gdf" />
+    <edge source="haz_tracts_gdf" target="compute_white_population_haz_tracts" />
+    <edge source="haz_tracts_gdf" target="generate_choropleth_map" />
+    <edge source="join_population_tracts" target="tracts_with_population_gdf" />
+    <edge source="tracts_with_population_gdf" target="compute_white_population_haz_tracts" />
+    <edge source="tracts_with_population_gdf" target="generate_choropleth_map" />
+    <edge source="compute_white_population_haz_tracts" target="white_population_at_risk" />
+    <edge source="generate_choropleth_map" target="choropleth_map" />
+  </graph>
+</graphml>
