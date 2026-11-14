@@ -19,10 +19,10 @@ Clone or download the repository, rename `your_config.ini` as `config.ini`. Then
 # Other relevant projects:
 - Geodata Retriever Agent:
   - [QGIS plugin](https://github.com/Teakinboyewa/AutonomousGIS_GeodataRetrieverAgent)
-  - [Code](https://github.com/gladcolor/LLM-Find/)
+  - [GitHub Repo](https://github.com/gladcolor/LLM-Find/)
 - Spatial Analysis Agent:
   - [QGIS Plugin](https://plugins.qgis.org/plugins/SpatialAnalysisAgent-master/#plugin-versions) 
-  - [Code](https://github.com/Teakinboyewa/SpatialAnalysisAgent)
+  - [GitHub Repo](https://github.com/Teakinboyewa/SpatialAnalysisAgent)
 
 # Literature
 - Zhenlong Li & Huan Ning (2023) Autonomous GIS: the nextgeneration AI-powered GIS, International Journal of Digital Earth, 16:2, 4668-4686, DOI: [10.1080/17538947.2023.2278895](https://doi.org/10.1080/17538947.2023.2278895)
