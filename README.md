@@ -1,8 +1,11 @@
-# Autonomous GIS: the next-generation AI-powered GIS
-- This repository was forked from https://github.com/gladcolor/LLM-Geo   
+# Autonomous GIS: The next-generation AI-powered GIS
+- This repository was forked from https://github.com/gladcolor/LLM-Geo
+
+# GIS Day 2026 SUDS Workshop
+- Download slides [here](https://github.com/alexandster/LLM-Geo/raw/refs/heads/master/slides.pptx)
+- [GIS Co-pilot test cases](https://giscience.psu.edu/copilot_test/) 
 
 # Installation
-
 Clone or download the repository, rename `your_config.ini` as `config.ini`. Then, put your OpenAI API key in the `config.ini` file. Please use GPT-4 or higher, the lower versions such as 3.5 do no have enough reasoning ability to generate correct solution graph and operation code. 
 
 # How to use
